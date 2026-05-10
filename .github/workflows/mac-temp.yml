@@ -15,7 +15,9 @@ jobs:
         id: check
         run: |
           COMMIT_MSG="${{ github.event.head_commit.message }}"
-          if echo "$COMMIT_MSG" | grep -qE 'start-empty|start-winload|start-dart-flutter-demo'; then
+          SUBJECT=$(echo "$COMMIT_MSG" | head -1)
+          echo "Subject: $SUBJECT"
+          if echo "$SUBJECT" | grep -q 'start-'; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
             echo "✓ Commit message contains trigger keyword"
           else
