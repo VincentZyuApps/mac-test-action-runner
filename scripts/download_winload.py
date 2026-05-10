@@ -1,4 +1,5 @@
 import json
+import os
 import urllib.request
 import platform
 from pathlib import Path
@@ -10,6 +11,9 @@ def get_latest_release():
     url = f"https://api.github.com/repos/{REPO}/releases/latest"
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/vnd.github+json")
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        req.add_header("Authorization", f"Bearer {token}")
 
     with urllib.request.urlopen(req) as resp:
         return json.load(resp)
