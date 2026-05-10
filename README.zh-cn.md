@@ -48,6 +48,19 @@ git push
 - 超时时间：10 分钟
 - Runner：`macos-latest`（ARM64）
 
+## 预览
+
+<table>
+<tr>
+<td align="center"><b>SSH 会话（macOS 15 ARM64）</b></td>
+<td align="center"><b>dart-flutter-demo 系统信息（macOS 15 ARM64）</b></td>
+</tr>
+<tr>
+<td><img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.png" alt="SSH 会话" width="400"/></td>
+<td><img src="doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png" alt="dart-flutter-demo 系统信息" width="400"/></td>
+</tr>
+</table>
+
 ## 脚本说明
 
 | 脚本 | 功能 |
