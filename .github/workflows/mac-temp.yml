@@ -7,6 +7,10 @@ on:
 
 jobs:
   mac-temp:
+    if: >
+      contains(github.event.head_commit.message, 'start-empty') ||
+      contains(github.event.head_commit.message, 'start-winload') ||
+      contains(github.event.head_commit.message, 'start-dart-flutter-demo')
     runs-on: macos-latest
     timeout-minutes: 10
 

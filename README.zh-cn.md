@@ -15,6 +15,8 @@ git commit --allow-empty -m "start-empty"
 git push
 ```
 
+<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.png" alt="macOS 15 ARM64 上的 SSH 会话" width="500"/>
+
 ### 2. 下载并测试 winload
 
 ```bash
@@ -40,6 +42,8 @@ git push
 - 挂载 DMG → 提取 .app 到 /Applications → 去除隔离属性 → 卸载 DMG
 - 自动启动 app 并截图保存到 `/tmp/dart_flutter_demo_screenshot.png`
 
+<img src="doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png" alt="macOS 15 ARM64 上的 dart-flutter-demo 系统信息" width="500"/>
+
 ### 通用说明
 
 - 所有模式都会启动 tmate SSH 会话
@@ -47,19 +51,6 @@ git push
 - 输入 `exit mac` 结束会话
 - 超时时间：10 分钟
 - Runner：`macos-latest`（ARM64）
-
-## 预览
-
-<table>
-<tr>
-<td align="center"><b>SSH 会话（macOS 15 ARM64）</b></td>
-<td align="center"><b>dart-flutter-demo 系统信息（macOS 15 ARM64）</b></td>
-</tr>
-<tr>
-<td><img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.png" alt="SSH 会话" width="400"/></td>
-<td><img src="doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png" alt="dart-flutter-demo 系统信息" width="400"/></td>
-</tr>
-</table>
 
 ## 脚本说明
 
