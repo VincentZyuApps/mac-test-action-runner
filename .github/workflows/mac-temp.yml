@@ -7,9 +7,8 @@ on:
 
 jobs:
   mac-temp:
-    if: contains(github.event.head_commit.message, 'start')
     runs-on: macos-latest
-    timeout-minutes: 60
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -21,15 +20,19 @@ jobs:
           sw_vers
           echo "Arch: $(uname -m)"
 
-      - name: Download latest winload
+      - name: Download winload (start-winload)
+        if: contains(github.event.head_commit.message, 'start-winload')
         run: |
-          python3 scripts/download_latest.py
+          python3 scripts/download_winload.py
           chmod +x winload
           ./winload --help || true
 
+      - name: Download dart-flutter-demo (start-dart-flutter-demo)
+        if: contains(github.event.head_commit.message, 'start-dart-flutter-demo')
+        run: python3 scripts/download_dart_flutter_demo.py
+
       - name: Install tmate
-        run: |
-          brew install tmate
+        run: brew install tmate
 
       - name: Start SSH session
         run: |

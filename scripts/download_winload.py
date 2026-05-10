@@ -5,6 +5,7 @@ from pathlib import Path
 
 REPO = "VincentZyuApps/winload"
 
+
 def get_latest_release():
     url = f"https://api.github.com/repos/{REPO}/releases/latest"
     req = urllib.request.Request(url)
@@ -12,6 +13,7 @@ def get_latest_release():
 
     with urllib.request.urlopen(req) as resp:
         return json.load(resp)
+
 
 def detect_arch():
     machine = platform.machine().lower()
@@ -21,6 +23,7 @@ def detect_arch():
         return "aarch64"
     else:
         raise RuntimeError(f"Unsupported arch: {machine}")
+
 
 def main():
     release = get_latest_release()
@@ -39,6 +42,7 @@ def main():
             return
 
     raise RuntimeError("Binary not found")
+
 
 if __name__ == "__main__":
     main()

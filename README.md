@@ -1,25 +1,51 @@
-# mac-test-tmp
+# mac-test-action-runner
 
-GitHub Actions workflow 用于在 macOS 上创建临时 SSH 会话。
+GitHub Actions workflow for temporary SSH sessions on macOS runners, with support for downloading and testing different projects.
 
-## 使用方法
+## Usage
 
-1. 推送包含 `start` 关键字的提交信息到 main 分支：
-   ```bash
-   git commit -m "start a temp mac"
-   git commit --allow-empty -m "start a temp mac"
-   git push
-   ```
+Push a commit containing a specific keyword to the main branch:
 
-2. Workflow 会自动启动 macOS runner 并创建 tmate SSH 会话
+### 1. Empty macOS SSH (no binary download)
 
-3. SSH 命令会在日志中输出
+```bash
+git commit --allow-empty -m "start-empty"
+git push
+```
 
-4. 输入 `exit mac` 结束会话
+### 2. Download and test winload
 
-## 功能
+```bash
+git commit --allow-empty -m "start-winload"
+git push
+```
 
-- 自动检测架构 (x86_64 / arm64)
-- 下载最新的 winload 二进制文件
-- 使用 tmate 提供临时 SSH 访问
-- 超时时间: 60 分钟
+- Automatically downloads the latest [winload](https://github.com/VincentZyuApps/winload) macOS binary
+- Auto-detects architecture (x86_64 / arm64)
+- Runs `./winload --help` after download
+
+### 3. Download and test dart-flutter-demo
+
+```bash
+git commit --allow-empty -m "start-dart-flutter-demo"
+git push
+```
+
+- Automatically downloads the latest [dart-flutter-demo](https://github.com/VincentZyuApps/dart-flutter-demo) macOS DMG
+- Mounts DMG → extracts .app to /Applications → removes quarantine → detaches DMG
+- Launches the app and takes a screenshot saved to `/tmp/dart_flutter_demo_screenshot.png`
+
+### General
+
+- All modes start a tmate SSH session
+- SSH command is printed in the workflow logs
+- Type `exit mac` to end the session
+- Timeout: 10 minutes
+- Runner: `macos-latest` (ARM64)
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `scripts/download_winload.py` | Download winload macOS binary from releases |
+| `scripts/download_dart_flutter_demo.py` | Download dart-flutter-demo DMG and install |
