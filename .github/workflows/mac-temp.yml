@@ -6,11 +6,27 @@ on:
       - main
 
 jobs:
-  mac-temp:
-    if: >
-      contains(github.event.head_commit.message, 'start-empty') ||
-      contains(github.event.head_commit.message, 'start-winload') ||
-      contains(github.event.head_commit.message, 'start-dart-flutter-demo')
+  check-trigger:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+    steps:
+      - name: Check commit message for trigger keyword
+        id: check
+        run: |
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          if echo "$COMMIT_MSG" | grep -qE 'start-empty|start-winload|start-dart-flutter-demo'; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "✓ Commit message contains trigger keyword"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "✗ Commit message does not contain trigger keyword"
+            echo "   Skipping macOS runner (commit: ${GITHUB_SHA:0:7})"
+          fi
+
+  mac-arm64-temp:
+    needs: check-trigger
+    if: needs.check-trigger.outputs.should_run == 'true'
     runs-on: macos-latest
     timeout-minutes: 10
 
@@ -94,3 +110,6 @@ jobs:
             fi
             sleep 5
           done
+
+      - name: Completion notification
+        run: echo "✅ macOS SSH session completed!"
