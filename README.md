@@ -28,10 +28,13 @@ git push
 
 ### 3. Download and test dart-flutter-demo
 
-```bash
-git commit --allow-empty -m "start-dart-flutter-demo"
-git push
-```
+| Commit message | Download | Launch | Screenshot | Artifact | Release |
+|---|---|---|---|---|---|
+| `start-dart-flutter-demo` | ✅ | ✅ | ✅ | ❌ | ❌ |
+| `start-dart-flutter-demo --artifact-pic` | ✅ | ✅ | ✅ | ✅ | ❌ |
+| `start-dart-flutter-demo --release-pic` | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+> `--release-pic` includes `--artifact-pic`. Release tag format: `screenshot-YYYYMMDD-HHMMSS`.
 
 - Automatically downloads the latest [dart-flutter-demo](https://github.com/VincentZyuApps/dart-flutter-demo) macOS DMG
 - Mounts DMG → extracts .app to /Applications → removes quarantine → detaches DMG

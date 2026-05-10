@@ -28,10 +28,13 @@ git push
 
 ### 3. 下载并测试 dart-flutter-demo
 
-```bash
-git commit --allow-empty -m "start-dart-flutter-demo"
-git push
-```
+| 提交信息 | 下载 | 启动 | 截图 | Artifact | Release |
+|---|---|---|---|---|---|
+| `start-dart-flutter-demo` | ✅ | ✅ | ✅ | ❌ | ❌ |
+| `start-dart-flutter-demo --artifact-pic` | ✅ | ✅ | ✅ | ✅ | ❌ |
+| `start-dart-flutter-demo --release-pic` | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+> `--release-pic` 包含 `--artifact-pic`。Release 标签格式：`screenshot-YYYYMMDD-HHMMSS`。
 
 - 自动下载最新的 [dart-flutter-demo](https://github.com/VincentZyuApps/dart-flutter-demo) macOS DMG
 - 挂载 DMG → 提取 .app 到 /Applications → 去除隔离属性 → 卸载 DMG

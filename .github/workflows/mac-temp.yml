@@ -38,6 +38,30 @@ jobs:
       - name: Install tmate
         run: brew install tmate
 
+      - name: Upload screenshot to artifacts
+        if: >
+          contains(github.event.head_commit.message, 'start-dart-flutter-demo') &&
+          (contains(github.event.head_commit.message, '--artifact-pic') ||
+           contains(github.event.head_commit.message, '--release-pic'))
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-screenshot
+          path: /tmp/dart_flutter_demo_screenshot.png
+          retention-days: 7
+
+      - name: Upload screenshot to GitHub Release
+        if: >
+          contains(github.event.head_commit.message, 'start-dart-flutter-demo') &&
+          contains(github.event.head_commit.message, '--release-pic')
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          gh release create "screenshot-${TIMESTAMP}" \
+            /tmp/dart_flutter_demo_screenshot.png \
+            --title "macOS Screenshot ${TIMESTAMP}" \
+            --notes "Screenshot from macos-latest runner"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Start SSH session
         run: |
           echo "Starting SSH session..."
