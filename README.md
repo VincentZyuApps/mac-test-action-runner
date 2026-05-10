@@ -1,3 +1,5 @@
+![mac-test-action-runner](https://socialify.git.ci/VincentZyuApps/mac-test-action-runner/image?custom_description=+GitHub+Actions+workflow+for+spinning+up+temporary+macOS+SSH+sessions+on+ARM64+runners%2C+aimed+at+testing+some+program.&custom_language=GitHub+Actions&description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F3%2F30%2FMacOS_logo.svg%2F120px-MacOS_logo.svg.png%3Futm_source%3Dcommons.wikimedia.org%26utm_campaign%3Dindex%26utm_content%3Dthumbnail%26_%3D20221222011002&name=1&owner=1&pattern=Circuit+Board&pulls=1&stargazers=1&theme=Light)
+
 # mac-test-action-runner
 
 GitHub Actions workflow for temporary SSH sessions on macOS runners, with support for downloading and testing different projects.
