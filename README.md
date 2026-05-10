@@ -32,9 +32,9 @@ git push
 |---|---|---|---|---|---|
 | `start-dart-flutter-demo` | ✅ | ✅ | ✅ | ❌ | ❌ |
 | `start-dart-flutter-demo --artifact-pic` | ✅ | ✅ | ✅ | ✅ | ❌ |
-| `start-dart-flutter-demo --release-pic` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `start-dart-flutter-demo --release-pic` | ✅ | ✅ | ✅ | ✅ | ✅ (inline) |
 
-> `--release-pic` includes `--artifact-pic`. Release tag format: `screenshot-YYYYMMDD-HHMMSS`.
+> `--release-pic` includes `--artifact-pic`. Release tag format: `screenshot-YYYYMMDD-HHMMSS`. The screenshot image is embedded inline in the release notes markdown.
 
 - Automatically downloads the latest [dart-flutter-demo](https://github.com/VincentZyuApps/dart-flutter-demo) macOS DMG
 - Mounts DMG → extracts .app to /Applications → removes quarantine → detaches DMG

@@ -38,6 +38,16 @@ jobs:
       - name: Install tmate
         run: brew install tmate
 
+      - name: Rename screenshot with timestamp
+        if: >
+          contains(github.event.head_commit.message, 'start-dart-flutter-demo') &&
+          (contains(github.event.head_commit.message, '--artifact-pic') ||
+           contains(github.event.head_commit.message, '--release-pic'))
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          cp /tmp/dart_flutter_demo_screenshot.png "/tmp/dart_flutter_demo_screenshot_${TIMESTAMP}.png"
+          echo "TIMESTAMP=${TIMESTAMP}" >> "$GITHUB_ENV"
+
       - name: Upload screenshot to artifacts
         if: >
           contains(github.event.head_commit.message, 'start-dart-flutter-demo') &&
@@ -45,8 +55,8 @@ jobs:
            contains(github.event.head_commit.message, '--release-pic'))
         uses: actions/upload-artifact@v4
         with:
-          name: macos-screenshot
-          path: /tmp/dart_flutter_demo_screenshot.png
+          name: macos-screenshot-${{ env.TIMESTAMP }}
+          path: /tmp/dart_flutter_demo_screenshot_${{ env.TIMESTAMP }}.png
           retention-days: 7
 
       - name: Upload screenshot to GitHub Release
@@ -54,11 +64,13 @@ jobs:
           contains(github.event.head_commit.message, 'start-dart-flutter-demo') &&
           contains(github.event.head_commit.message, '--release-pic')
         run: |
-          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-          gh release create "screenshot-${TIMESTAMP}" \
-            /tmp/dart_flutter_demo_screenshot.png \
+          TAG="screenshot-${TIMESTAMP}"
+          FILENAME="dart_flutter_demo_screenshot_${TIMESTAMP}.png"
+          IMAGE_URL="https://github.com/${{ github.repository }}/releases/download/${TAG}/${FILENAME}"
+          gh release create "$TAG" \
+            "/tmp/${FILENAME}" \
             --title "macOS Screenshot ${TIMESTAMP}" \
-            --notes "Screenshot from macos-latest runner"
+            --notes "![Screenshot](${IMAGE_URL})"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
