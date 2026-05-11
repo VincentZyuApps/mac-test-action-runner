@@ -15,7 +15,12 @@ git commit --allow-empty -m "start-empty"
 git push
 ```
 
-<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.png" alt="SSH Session on macOS 15 ARM64" width="500"/>
+<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.fastfetch.uname-a.sm_vers.arch.png" alt="SSH Session on macOS 15 ARM64 (fastfetch)" width="500"/>
+
+<br/>
+
+<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.btop.png" alt="macOS 15 ARM64 btop" width="350"/>
+<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.htop.png" alt="macOS 15 ARM64 htop" width="350"/>
 
 ### 2. Download and test winload
 
