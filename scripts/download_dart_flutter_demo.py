@@ -106,7 +106,9 @@ def main():
 
     import time
 
-    time.sleep(5)
+    for i in range(10, -1, -1):
+        print(f"Waiting for UI to load... {i}s")
+        time.sleep(1)
 
     run("screencapture -x /tmp/dart_flutter_demo_screenshot.png")
     print("\nScreenshot saved to /tmp/dart_flutter_demo_screenshot.png")
