@@ -1,9 +1,9 @@
 import json
 import os
-import subprocess
 import time
-import urllib.request
 import platform
+import subprocess
+import urllib.request
 from pathlib import Path
 
 REPO = "VincentZyuApps/dart-flutter-demo"

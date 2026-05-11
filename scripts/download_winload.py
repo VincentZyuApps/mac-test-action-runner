@@ -1,7 +1,7 @@
 import json
 import os
-import urllib.request
 import platform
+import urllib.request
 from pathlib import Path
 
 REPO = "VincentZyuApps/winload"
