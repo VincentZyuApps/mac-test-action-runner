@@ -15,12 +15,9 @@ git commit --allow-empty -m "start-empty"
 git push
 ```
 
-<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.fastfetch.uname-a.sm_vers.arch.png" alt="macOS 15 ARM64 上的 SSH 会话（fastfetch）" width="500"/>
-
-<br/>
-
-<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.btop.png" alt="macOS 15 ARM64 btop" width="350"/>
-<img src="doc/images/preview.ssh.github.ci.runner.macos15.arm64.htop.png" alt="macOS 15 ARM64 htop" width="350"/>
+![doc/images/preview.ssh.github.ci.runner.macos15.arm64.fastfetch.uname-a.sm_vers.arch.png](doc/images/preview.ssh.github.ci.runner.macos15.arm64.fastfetch.uname-a.sm_vers.arch.png)
+![doc/images/preview.ssh.github.ci.runner.macos15.arm64.btop.png](doc/images/preview.ssh.github.ci.runner.macos15.arm64.btop.png)
+![doc/images/preview.ssh.github.ci.runner.macos15.arm64.htop.png](doc/images/preview.ssh.github.ci.runner.macos15.arm64.htop.png)
 
 ### 2. 下载并测试 winload
 
@@ -47,7 +44,8 @@ git push
 - 挂载 DMG → 提取 .app 到 /Applications → 去除隔离属性 → 卸载 DMG
 - 自动启动 app 并截图保存到 `/tmp/dart_flutter_demo_screenshot.png`
 
-<img src="doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png" alt="macOS 15 ARM64 上的 dart-flutter-demo 系统信息" width="500"/>
+![doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png](doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png)
+
 
 ### 通用说明
 
