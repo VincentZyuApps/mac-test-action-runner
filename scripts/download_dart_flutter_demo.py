@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import time
 import urllib.request
 import platform
 from pathlib import Path
@@ -102,16 +103,32 @@ def main():
     print("Type 'exit mac' to end the SSH session.")
     print("=" * 60)
 
-    run("open /Applications/dart_flutter_demo.app")
+    dark_mode = os.environ.get("DARK_MODE", "").strip().lower() in ("true", "1", "yes")
 
-    import time
+    if dark_mode:
+        run(
+            "osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to true'"
+        )
+        print("Switched to dark mode, waiting for UI to update...")
+        time.sleep(2)
+
+    run("open /Applications/dart_flutter_demo.app")
 
     for i in range(10, -1, -1):
         print(f"Waiting for UI to load... {i}s")
         time.sleep(1)
 
-    run("screencapture -x /tmp/dart_flutter_demo_screenshot.png")
-    print("\nScreenshot saved to /tmp/dart_flutter_demo_screenshot.png")
+    screenshot_suffix = "_dark" if dark_mode else ""
+    screenshot_path = f"/tmp/dart_flutter_demo_screenshot{screenshot_suffix}.png"
+
+    run(f"screencapture -x {screenshot_path}")
+    print(f"\nScreenshot saved to {screenshot_path}")
+
+    if dark_mode:
+        run(
+            "osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to false'"
+        )
+        print("Switched back to light mode.")
 
 
 if __name__ == "__main__":

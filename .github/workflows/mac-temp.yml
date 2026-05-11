@@ -55,6 +55,7 @@ jobs:
         if: contains(github.event.head_commit.message, 'start-dart-flutter-demo')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DARK_MODE: ${{ contains(github.event.head_commit.message, '--dark') && 'true' || '' }}
         run: python3 scripts/download_dart_flutter_demo.py
 
       - name: Install tmate
@@ -67,8 +68,13 @@ jobs:
            contains(github.event.head_commit.message, '--release-pic'))
         run: |
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-          cp /tmp/dart_flutter_demo_screenshot.png "/tmp/dart_flutter_demo_screenshot_${TIMESTAMP}.png"
+          DARK_SUFFIX=""
+          if echo "${{ github.event.head_commit.message }}" | grep -q '\-\-dark'; then
+            DARK_SUFFIX="_dark"
+          fi
+          cp "/tmp/dart_flutter_demo_screenshot${DARK_SUFFIX}.png" "/tmp/dart_flutter_demo_screenshot${DARK_SUFFIX}_${TIMESTAMP}.png"
           echo "TIMESTAMP=${TIMESTAMP}" >> "$GITHUB_ENV"
+          echo "DARK_SUFFIX=${DARK_SUFFIX}" >> "$GITHUB_ENV"
 
       - name: Upload screenshot to artifacts
         if: >
@@ -77,8 +83,8 @@ jobs:
            contains(github.event.head_commit.message, '--release-pic'))
         uses: actions/upload-artifact@v4
         with:
-          name: macos-screenshot-${{ env.TIMESTAMP }}
-          path: /tmp/dart_flutter_demo_screenshot_${{ env.TIMESTAMP }}.png
+          name: macos-screenshot${{ env.DARK_SUFFIX }}-${{ env.TIMESTAMP }}
+          path: /tmp/dart_flutter_demo_screenshot${{ env.DARK_SUFFIX }}_${{ env.TIMESTAMP }}.png
           retention-days: 7
 
       - name: Upload screenshot to GitHub Release
@@ -86,12 +92,13 @@ jobs:
           contains(github.event.head_commit.message, 'start-dart-flutter-demo') &&
           contains(github.event.head_commit.message, '--release-pic')
         run: |
-          TAG="screenshot-${TIMESTAMP}"
-          FILENAME="dart_flutter_demo_screenshot_${TIMESTAMP}.png"
+          DARK_SUFFIX="${DARK_SUFFIX:-}"
+          TAG="screenshot${DARK_SUFFIX}-${TIMESTAMP}"
+          FILENAME="dart_flutter_demo_screenshot${DARK_SUFFIX}_${TIMESTAMP}.png"
           IMAGE_URL="https://github.com/${{ github.repository }}/releases/download/${TAG}/${FILENAME}"
           gh release create "$TAG" \
             "/tmp/${FILENAME}" \
-            --title "macOS Screenshot ${TIMESTAMP}" \
+            --title "macOS Screenshot${DARK_SUFFIX} ${TIMESTAMP}" \
             --notes "![Screenshot](${IMAGE_URL})"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -34,15 +34,20 @@ git push
 
 | Commit message | Download | Launch | Screenshot | Artifact | Release |
 |---|---|---|---|---|---|
-| `start-dart-flutter-demo` | ✅ | ✅ | ✅ | ❌ | ❌ |
-| `start-dart-flutter-demo --artifact-pic` | ✅ | ✅ | ✅ | ✅ | ❌ |
-| `start-dart-flutter-demo --release-pic` | ✅ | ✅ | ✅ | ✅ | ✅ (inline) |
+| `start-dart-flutter-demo` | ✅ | ✅ | ✅ (light) | ❌ | ❌ |
+| `start-dart-flutter-demo --dark` | ✅ | ✅ | ✅ (dark) | ❌ | ❌ |
+| `start-dart-flutter-demo --artifact-pic` | ✅ | ✅ | ✅ (light) | ✅ | ❌ |
+| `start-dart-flutter-demo --artifact-pic --dark` | ✅ | ✅ | ✅ (dark) | ✅ | ❌ |
+| `start-dart-flutter-demo --release-pic` | ✅ | ✅ | ✅ (light) | ✅ | ✅ (inline) |
+| `start-dart-flutter-demo --release-pic --dark` | ✅ | ✅ | ✅ (dark) | ✅ | ✅ (inline) |
 
-> `--release-pic` includes `--artifact-pic`. Release tag format: `screenshot-YYYYMMDD-HHMMSS`. The screenshot image is embedded inline in the release notes markdown.
+> `--release-pic` includes `--artifact-pic`. Release tag format: `screenshot-YYYYMMDD-HHMMSS` (dark mode: `screenshot_dark-YYYYMMDD-HHMMSS`). The screenshot image is embedded inline in the release notes markdown.
+>
+> `--dark` switches macOS to dark mode before launching the app and taking a screenshot. Screenshot filenames include a `_dark` suffix.
 
 - Automatically downloads the latest [dart-flutter-demo](https://github.com/VincentZyuApps/dart-flutter-demo) macOS DMG
 - Mounts DMG → extracts .app to /Applications → removes quarantine → detaches DMG
-- Launches the app and takes a screenshot saved to `/tmp/dart_flutter_demo_screenshot.png`
+- Launches the app and takes a screenshot saved to `/tmp/dart_flutter_demo_screenshot.png` (or `_dark.png` with `--dark`)
 
 ![doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png](doc/images/preview.screenshot.github.ci.runner.macos15.arm64.dart_flutter_demo.page0_system_info.png)
 
