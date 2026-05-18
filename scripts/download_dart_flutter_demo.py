@@ -47,7 +47,7 @@ def main():
     version = tag.lstrip("v")
     arch = detect_arch()
 
-    dmg_pattern = f"dart-flutter-demo-showcase-macos-{arch}-v{version}.dmg"
+    dmg_pattern = f"dart-flutter-demo-macos-{arch}-v{version}.dmg"
 
     download_url = None
     for asset in release["assets"]:
